@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H1CaseSQLTableOrDataReader.Databaselag;
+using Biograf.Databaselag;
 
-namespace H1CaseSQLTableOrDataReader.Model
+namespace Biograf.Model
 {
     class Ordre
     {
@@ -17,7 +14,7 @@ namespace H1CaseSQLTableOrDataReader.Model
         public int Filmid { get; set; }
         public int Billetantal { get; set; }
         public bool Betalt { get; set; }
-        // det ville give mening at implementere betalt som en boolsk værdi
+
         // default contructor
         public Ordre()
         { }
@@ -34,7 +31,6 @@ namespace H1CaseSQLTableOrDataReader.Model
                 Betalt = true;
             else
                 Betalt = false;
-
         }
 
         // det samme som med kundeopdatering
@@ -66,13 +62,12 @@ namespace H1CaseSQLTableOrDataReader.Model
             }
         }
     }
-        class Film
+    class Film
     { 
         public int Filmid { get; set; }
         public string Filmtitel { get; set; }
         public int Varighed { get; set; }
         public int Pris { get; set; }
-
     }
     class Kunde : IComparable<Kunde>
     {
@@ -83,7 +78,6 @@ namespace H1CaseSQLTableOrDataReader.Model
         public string Adresse { get; set; }
         public int Alder { get; set; }
         public int Telefon { get; set; }
-
 
         public Kunde() { } //default constructor
 
@@ -96,6 +90,7 @@ namespace H1CaseSQLTableOrDataReader.Model
             Alder = alder;
             Telefon = telefon;
         }
+
         public static void UpdateInDB(int kundeid, string updatefelt, string updatevalue)
         {
             string sql = $"UPDATE Kunder SET {updatefelt} = '"+updatevalue + "' WHERE kundeid='"+kundeid +"'";
@@ -109,11 +104,10 @@ namespace H1CaseSQLTableOrDataReader.Model
                 Console.WriteLine("Der opstod en fejl, kunden er IKKE opdateret");
             }
         }
+
         public static void DeleteInDB(int kundeid)
         {
-            
             string sql = "DELETE FROM Kunder WHERE kundeid='" + kundeid + "'";
-
             try
             {
                 SQL.DeleteData(sql);
@@ -140,7 +134,6 @@ namespace H1CaseSQLTableOrDataReader.Model
             {
                 Console.WriteLine("Der opstod en fejl i oprettelsen, kunden IKKE oprettet");
             }
-
         }
 
         public static List<Kunde> DanKundeListe()
@@ -168,8 +161,8 @@ namespace H1CaseSQLTableOrDataReader.Model
             Console.WriteLine("Den første række " + denførsterække + kundeDataTable.Rows.Count);
             */
             return listKunder;
-        
-            }
+        }
+
         public static List<Ordre> DanOrdreListe(int kundeid)
         {
             string sql = "SELECT * FROM kunder,ordre WHERE kunder.kundeid=Ordre.kundeid and kunder.kundeid='" + kundeid + "'";
@@ -178,17 +171,15 @@ namespace H1CaseSQLTableOrDataReader.Model
             List<Ordre> listOrdre = new List<Ordre>();
             foreach (DataRow OrdreData in ordreDataTable.Rows)
             {
-
                     listOrdre.Add(new Ordre()
                     {
-
                         Ordreid = Convert.ToInt32(OrdreData["kundeid"]),
                         SpilleTidspunkt = Convert.ToDateTime(OrdreData["spilletidspunkt"]),
                         Pris = Convert.ToInt32(OrdreData["pris"]),
                         Kundeid = Convert.ToInt32(OrdreData["kundeid"]),
                         Filmid = Convert.ToInt32(OrdreData["filmid"]),
                         Billetantal = Convert.ToInt32(OrdreData["billetantal"]),
-                       // Betalt = (Convert.ToString(OrdreData["betalt"]) == "ja" ? true : false)
+                        Betalt = (Convert.ToString(OrdreData["betalt"]) == "ja" ? true : false)
                     }) ;
             }
             return listOrdre;
@@ -196,7 +187,6 @@ namespace H1CaseSQLTableOrDataReader.Model
             public int CompareTo(Kunde that)
             {
                 // troede at det var nemmere
-
                 if ((string.Compare(this.Efternavn, that.Efternavn)) > (string.Compare(that.Efternavn, this.Efternavn)))
                 {
                     return -1;

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace H1CaseSQLTableOrDataReader.Databaselag
+namespace Biograf.Databaselag
 {
     /// <summary>
     /// ConnectionString indeholder navn på SQL Server, Databasenavn samt sikkerhedsoplysninger, f.eks. hvordan logges på m.m.
     /// Her er der refereret til lokalhost i stedet for til en navngiven server. 
-    /// private static string ConnectionString = "Data Source=TEC-5350-LA0116;Initial Catalog=sqleksempler; Integrated...
     /// </summary>
     static class SQL
     {
@@ -33,10 +29,9 @@ namespace H1CaseSQLTableOrDataReader.Databaselag
                 }
             }
         }
+        // 1 Create, 2 Read, 3 Update og 4 Delete (CRUD)
 
-        // Create, Read, Update og Delete (CRUD)
-
-        //1) Create, Data der skal creates i en tabel (det hedder insert på sql'sk)
+        //1) Create, Data der skal creates i en tabel (insert)
         public static void insert(string sql)
         {
             using (SqlConnection con = new SqlConnection(ConnectionString))
@@ -47,17 +42,7 @@ namespace H1CaseSQLTableOrDataReader.Databaselag
             }
         }
 
-        public static void Update(string sql)
-        {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        //2) Read, Data der skal læses fra en tabel (det hedder select på sql'sk)
+        //2) Read, Data der skal læses fra en tabel (select)
 
         //2a) DataAdapter og DataTable, returnere DataTable
         public static DataTable ReadTable(string sql)
@@ -73,7 +58,6 @@ namespace H1CaseSQLTableOrDataReader.Databaselag
                     con.Open();
                     a.Fill(records);
                 }
-
                 return records;
             }
         }
@@ -100,14 +84,25 @@ namespace H1CaseSQLTableOrDataReader.Databaselag
 
                     Console.WriteLine($"Id: {id} navn: {navn} adresse: {adr} - alder: {alder}");
                 }
-
             }
         }
+        
+        //3) Update
+        public static void Update(string sql)
+        {
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        //4) Delete
         public static void DeleteData(string sqldel)
         {
             // der skal være en form for tjek, om det ønskede opslag findes
 
-            Console.WriteLine("DeleteData");
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
                 con.Open();
