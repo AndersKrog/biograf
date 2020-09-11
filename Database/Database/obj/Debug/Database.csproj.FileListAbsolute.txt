@@ -11,3 +11,9 @@ C:\Users\Borgerskabet\Source\Repos\biograf\Database\Database\obj\Debug\Database.
 C:\Users\Borgerskabet\Source\Repos\biograf\Database\Database\obj\Debug\Database.csproj.CoreCompileInputs.cache
 C:\Users\Borgerskabet\Source\Repos\biograf\Database\Database\obj\Debug\Database.exe
 C:\Users\Borgerskabet\Source\Repos\biograf\Database\Database\obj\Debug\Database.pdb
+C:\Users\Tec\Source\Repos\biograf\Database\Database\obj\Debug\Database.csprojAssemblyReference.cache
+C:\Users\Tec\Source\Repos\biograf\Database\Database\obj\Debug\Database.exe
+C:\Users\Tec\Source\Repos\biograf\Database\Database\obj\Debug\Database.pdb
+C:\Users\Tec\Source\Repos\biograf\Database\Database\bin\Debug\Database.exe.config
+C:\Users\Tec\Source\Repos\biograf\Database\Database\bin\Debug\Database.exe
+C:\Users\Tec\Source\Repos\biograf\Database\Database\bin\Debug\Database.pdb

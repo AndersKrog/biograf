@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Kunder.cs" />
+    <Compile Include="Model\Film.cs" />
+    <Compile Include="Model\Kunde.cs" />
+    <Compile Include="Model\Ordre.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Databaselag\Sql.cs" />
